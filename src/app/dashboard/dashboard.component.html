@@ -1,0 +1,120 @@
+<app-side-menu></app-side-menu>
+<div class="container-fluid mt-5">
+    <div class="container">
+
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"></a>
+            <form class="form-inline">
+
+                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" type="button"> <i
+                        class="fa fa-shopping-cart"></i>Buy Now</button>
+            </form>
+        </nav>
+
+
+        <div class="row">
+            <div class="col-sm-4" *ngFor="let data of productsData; let i=index">
+                <div class="card">
+                    <div class="card-body">
+                        <img [src]="data?.img">
+                        <h5 style="text-align:center">{{data.productName}}</h5>
+                        <p style="text-align: center; color: red;">${{data.productPrice}}</p>
+                        <div style="width: 150px; margin:auto">
+                            <button  type="button" (click)="minus(data)"><i class="fa fa-minus"></i></button>
+                            <input style="width:50px;text-align: center"  [value]="data.quantity">
+                            <button  type="button" (click)="plus(data)"><i class="fa fa-plus"></i></button>
+                        </div>
+                      <br>
+                        <div style="width: 150px; margin:auto">
+                            <button type="button" (click)="addToBag(data.productName,data.productPrice,data.quantity)">Add to
+                                Bag</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3" *ngIf="productsCartData.length!=0">
+            <div class="col-md-12">
+                <div class="tableStyle">
+                    <table class="table mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price Details</th>
+                                <th scope="col">Order Total</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of productsCartData; let i=index">
+                                <td>{{data.productName}}</td>
+                                <td>{{data.quan}}</td>
+                                <td>{{data.productPrice}}</td>
+                                <td>{{data.total}}</td>
+                                <td><button class="Btn btn-danger" (click)="remove(i)" type="button">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addProductForm">
+
+                    <div class="form-group">
+                        <label>Upload Product Image</label>
+                        <input type="file" id="file" class="form-control" (change)="onFileChange($event)"
+                            formControlName="image" [ngClass]="{'is-invalid':submitted && f.image.errors}">
+                        <div *ngIf="f.image.errors" class="invalid-feedback">
+                            <div *ngIf="f.image.errors.required">
+                                Image is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label>Product Name </label>
+                        <input type="text" formControlName="productName" class="form-control "
+                            placeholder="Enter Product Name"
+                            [ngClass]="{'is-invalid':submitted && f.productName.errors}">
+                        <div *ngIf="f.productName.errors" class="invalid-feedback">
+                            <div *ngIf="f.productName.errors.required">
+                                Product Name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-control">
+                        <label>Price </label>
+                        <input type="number" class="form-control " formControlName="price"
+                            placeholder="Enter Product Price" [ngClass]="{'is-invalid':submitted && f.price.errors}">
+                        <div *ngIf="f.price.errors" class="invalid-feedback">
+                            <div *ngIf="f.price.errors.required">
+                                Price is required
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addProduct()">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>

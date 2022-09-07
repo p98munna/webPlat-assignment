@@ -1,0 +1,28 @@
+<nav id="menu">
+    <!-- <div class="label"><img /></div> -->
+    <a  class="nav-link text-truncate" [routerLink]="['/dashboard']"  routerLinkActive="active-link">
+       
+        <i class="fa fa-home "></i>
+        <span class="nav-text" title="dashboard">Dashboard</span>
+    </a>
+    <a class="nav-link text-truncate" [routerLink]="['/all-timesheets']"  routerLinkActive="active-link">
+        <i class="fa fa-calendar"></i>
+        <span class="nav-text" title="alltimesheets">All TimeSheets</span>
+    </a>
+    <a class="nav-link text-truncate" [routerLink]="['/my-timesheets']" routerLinkActive="active-link">
+        <i class="fa fa-clock" aria-hidden="true"></i>
+        <span class="nav-text" title="mytimesheet">My TimeSheets</span>
+    </a>
+    <a class="nav-link text-truncate" [routerLink]="['/my-project']" routerLinkActive="active-link">
+        <i class="fa fa-file"></i>
+        <span class="nav-text" title="myproject">My Project</span>
+    </a>
+    <a class="nav-link text-truncate" [routerLink]="['/my-profile']" routerLinkActive="active-link">
+        <i class="fa fa-user"></i>
+        <span class="nav-text" title="myprofile">My Profile</span>
+    </a>
+    <a class="nav-link text-truncate" [routerLink]="['/settings']" routerLinkActive="active-link">
+        <i class="fa fa-cog"></i>
+        <span class="nav-text" title="dashboard">Settings</span>
+    </a>
+</nav>
